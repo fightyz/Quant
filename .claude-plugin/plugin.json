@@ -1,0 +1,12 @@
+{
+  "name": "jisilu-digest",
+  "version": "1.0.0",
+  "description": "抓取并整理集思录（jisilu.cn）最新投资讨论，生成结构化摘要。",
+  "author": {
+    "name": "fightyz",
+    "url": "https://github.com/fightyz"
+  },
+  "repository": "https://github.com/fightyz/jisilu-digest",
+  "license": "MIT",
+  "keywords": ["jisilu", "集思录", "投资", "A股", "论坛", "摘要"]
+}
