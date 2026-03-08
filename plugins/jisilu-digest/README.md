@@ -14,10 +14,10 @@ Claude Code 插件：自动抓取并整理[集思录](https://www.jisilu.cn/expl
 
 ```bash
 # 1. 添加市场源
-/plugin marketplace add fightyz/jisilu-digest
+/plugin marketplace add fightyz/Quant
 
 # 2. 安装插件
-/plugin install jisilu-digest@fightyz-jisilu-digest
+/plugin install jisilu-digest@fightyz-Quant
 ```
 
 ## 使用
