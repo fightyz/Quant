@@ -58,13 +58,25 @@ description: >
 集思录帖子经常包含数据图表（Excel 截图、K线图、指标表格等），这些图片往往包含比文字更关键的数据。在抓取每个帖子时，如果发现图片 URL，**必须**执行以下步骤：
 
 1. 用 Bash 工具执行 `curl -s -o /tmp/jisilu_<帖子ID>_<序号>.png "<图片URL>"` 下载图片
-2. 用 Bash 工具执行 `sips -g pixelWidth -g pixelHeight /tmp/jisilu_<帖子ID>_<序号>.png` 检查尺寸
+2. 检查图片尺寸（跨平台）：
+   ```bash
+   # Linux (ImageMagick)
+   magick identify -format "%w %h" /tmp/jisilu_<帖子ID>_<序号>.png
+   # macOS (sips)
+   # sips -g pixelWidth -g pixelHeight /tmp/jisilu_<帖子ID>_<序号>.png
+   ```
 3. 如果图片高度 > 600px，先放大再分段裁剪以提高辨识度：
    ```bash
-   sips -Z 2000 /tmp/jisilu_<帖子ID>_<序号>.png --out /tmp/jisilu_<帖子ID>_<序号>_scaled.png
+   # Linux (ImageMagick)
+   magick /tmp/jisilu_<帖子ID>_<序号>.png -resize 2000x2000 /tmp/jisilu_<帖子ID>_<序号>_scaled.png
    # 按高度 500-600px 分段裁剪，注意相邻段重叠 100px 避免截断内容
-   sips -c 600 <width> --cropOffset 0 0 /tmp/jisilu_..._scaled.png --out /tmp/jisilu_..._part1.png
-   sips -c 600 <width> --cropOffset 500 0 /tmp/jisilu_..._scaled.png --out /tmp/jisilu_..._part2.png
+   magick /tmp/jisilu_..._scaled.png -crop <width>x600+0+0 /tmp/jisilu_..._part1.png
+   magick /tmp/jisilu_..._scaled.png -crop <width>x600+0+500 /tmp/jisilu_..._part2.png
+
+   # macOS (sips) 替代命令：
+   # sips -Z 2000 /tmp/jisilu_<帖子ID>_<序号>.png --out /tmp/jisilu_<帖子ID>_<序号>_scaled.png
+   # sips -c 600 <width> --cropOffset 0 0 /tmp/jisilu_..._scaled.png --out /tmp/jisilu_..._part1.png
+   # sips -c 600 <width> --cropOffset 500 0 /tmp/jisilu_..._scaled.png --out /tmp/jisilu_..._part2.png
    ```
 4. 用 Read 工具逐段查看裁剪后的图片，提取数据
 5. 如果某些文字辨识不清，在输出中标注"[辨识不清]"而非猜测
