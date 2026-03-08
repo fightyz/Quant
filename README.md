@@ -13,7 +13,11 @@ Claude Code 插件：自动抓取并整理[集思录](https://www.jisilu.cn/expl
 ## 安装
 
 ```bash
-/plugin install https://github.com/fightyz/jisilu-digest
+# 1. 添加市场源
+/plugin marketplace add fightyz/jisilu-digest
+
+# 2. 安装插件
+/plugin install jisilu-digest@fightyz-jisilu-digest
 ```
 
 ## 使用
