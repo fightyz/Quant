@@ -9,10 +9,7 @@
     {
       "name": "jisilu-digest",
       "description": "抓取并整理集思录（jisilu.cn）最新投资讨论，生成结构化摘要。",
-      "source": {
-        "type": "directory",
-        "path": "."
-      }
+      "source": "./plugins/jisilu-digest"
     }
   ]
 }
